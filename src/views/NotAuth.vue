@@ -1,15 +1,16 @@
 <template>
-  <div class="not-auth">
-    <div class="container">
-      <div class="content">
-        <h1>Oops....</h1>
-        <p>Not auth</p>
-        <button @click="goBack">Go Back</button>
-      </div>
-      <div class="image">
-        <img alt="403 Forbidden" src="@/assets/403.png" />
-      </div>
-    </div>
+  <div class="not-auth1">
+    <!--    <div class="container">-->
+    <!--      <div class="content">-->
+    <!--        <h1>Oops....</h1>-->
+    <!--        <p>Not auth</p>-->
+    <!--        <button @click="goBack">Go Back</button>-->
+    <!--      </div>-->
+    <!--      <div class="image">-->
+    <!--        <img alt="403 Forbidden" src="@/assets/403.png" />-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <div>404</div>
   </div>
 </template>
 

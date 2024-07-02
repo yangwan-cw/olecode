@@ -1,5 +1,5 @@
 <template>
-  <a-row align="center" class="basic-component-header" :wrap="false">
+  <a-row :wrap="false" align="center" class="basic-component-header">
     <a-col flex="auto">
       <a-menu
         :selected-keys="searchKey"
@@ -17,7 +17,7 @@
             <div class="olecode-vue3">OleCode-Vue3</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleTag" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -33,19 +33,31 @@
 <script lang="ts" setup>
 import { routes } from "@/router/routers";
 import router from "@/router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import useStore from "@/store/index";
 import { storeToRefs } from "pinia";
+import checkAuth from "@/auth/CheckAccess";
 
 const routerApi = useRouter();
 const searchKey = ref(["/"]);
 const { useUserStore } = useStore();
 const { loginUser } = storeToRefs(useUserStore());
+const { fetchAndUpdateUser } = useUserStore();
+
+const visibleTag = computed(() => {
+  return routes.filter((item, index) => {
+    if (item.meta?.isHideTag) {
+      return false;
+    }
+    if (!checkAuth(useUserStore(), item?.meta?.roles as string)) {
+      return false;
+    }
+    return true;
+  });
+});
 
 routerApi.afterEach((to, from, failure) => {
-  console.log(from);
-  console.log(failure);
   searchKey.value = [to.path];
 });
 
@@ -54,6 +66,7 @@ const toPage = (key: string) => {
     path: key,
   });
 };
+fetchAndUpdateUser();
 </script>
 
 <style lang="less" scoped>

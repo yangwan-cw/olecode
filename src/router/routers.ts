@@ -8,6 +8,9 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "首页",
     component: HomeView,
+    meta: {
+      title: "首页",
+    },
   },
   {
     path: "/admin",
@@ -15,15 +18,17 @@ export const routes: Array<RouteRecordRaw> = [
     component: AdminView,
     meta: {
       title: "页面不存在",
-      icon: "lock",
-      auth: "admin",
-      notShowOnTagsView: true,
+      roles: "admin",
     },
   },
   {
     path: "/error",
     name: "错误页面",
     component: NotAuth,
+    meta: {
+      title: "错误页面",
+      isHideTag: true,
+    },
   },
   {
     path: "/about",
@@ -33,5 +38,6 @@ export const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    meta: { title: "关于页面" },
   },
 ];

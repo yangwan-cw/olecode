@@ -33,13 +33,11 @@ import BasicHeader from "@/components/BasicHeader.vue";
 <style lang="less" scoped>
 #basic-layout {
   .basic-layout-content {
-    background-color: #009cff;
     margin-bottom: 16px;
     padding: 20px;
   }
 
   .basic-layout-footer {
-    background-color: red;
     font-size: 16px;
     text-align: center;
     padding: 16px;

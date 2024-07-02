@@ -17,14 +17,13 @@ const router = useRouter();
 const { useUserStore } = useStore();
 const { loginUser } = useUserStore();
 
-router.beforeEach((to, from, next) => {
-  if (to.meta?.auth === "admin") {
-    console.log(to);
-    if (loginUser?.userName !== "admin") {
-      next("/error");
-      return;
-    }
-  }
-  next();
-});
+// router.beforeEach((to, from, next) => {
+//   // if (to.meta?.roles === "admin") {
+//   //   if (loginUser?.roles !== "admin") {
+//   //     next("/error");
+//   //     return;
+//   //   }
+//   // }
+//   // next();
+// });
 </script>
