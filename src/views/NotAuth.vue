@@ -1,7 +1,87 @@
 <template>
-  <div class="home">
-    <p>403</p>
+  <div class="not-auth">
+    <div class="container">
+      <div class="content">
+        <h1>Ooops....</h1>
+        <p>Not auth</p>
+        <button @click="goBack">Go Back</button>
+      </div>
+      <div class="image">
+        <img src="@/assets/403.png" alt="403 Forbidden" />
+      </div>
+    </div>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const goBack = () => {
+  router.back();
+};
+</script>
+
+<style scoped lang="less">
+.not-auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  //background-color: #fff;
+  //box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #333;
+  margin: 0;
+}
+
+p {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #165dff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+//button:hover {
+//  background-color: #165dff;
+//}
+
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+</style>

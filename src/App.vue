@@ -1,30 +1,30 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="layout-app">
+    <basic-layout />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+<style lang="less">
+#layout-app {
 }
 </style>
+<script lang="ts" setup>
+import BasicLayout from "@/layouts/BasicLayout.vue";
+import { useRouter } from "vue-router";
+import useStore from "@/store";
+
+const router = useRouter();
+const { useUserStore } = useStore();
+const { loginUser } = useUserStore();
+
+router.beforeEach((to, from, next) => {
+  if (to.meta?.auth === "admin") {
+    console.log(to);
+    if (loginUser?.userName !== "admin") {
+      next("/error");
+      return;
+    }
+  }
+  next();
+});
+</script>

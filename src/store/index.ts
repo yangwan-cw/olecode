@@ -1,9 +1,6 @@
-import { createStore } from "vuex";
+import { useCounterStore } from "@/store/module/counter";
+import { useUserStore } from "@/store/module/useUserStore";
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
-});
+export default function useStore() {
+  return { useCounterStore, useUserStore };
+}
