@@ -18,10 +18,10 @@
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
-const goBack = () => {
-  router.back();
-};
+//
+// const goBack = () => {
+//   router.back();
+// };
 </script>
 
 <style lang="less" scoped>
