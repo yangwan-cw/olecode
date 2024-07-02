@@ -3,7 +3,7 @@ import { UserState } from "@/interface/UserState";
 
 /**
  * 通用权限校验
- * @param loginUser 登录用户
+ * @param userParam 登录用户
  * @param needAccess 需要什么权限
  * return 权限结果
  */

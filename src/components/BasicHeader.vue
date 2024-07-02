@@ -46,18 +46,19 @@ const { loginUser } = storeToRefs(useUserStore());
 const { fetchAndUpdateUser } = useUserStore();
 
 const visibleTag = computed(() => {
-  return routes.filter((item, index) => {
+  return routes.filter((item) => {
     if (item.meta?.isHideTag) {
       return false;
     }
-    if (!checkAuth(useUserStore(), item?.meta?.roles as string)) {
-      return false;
-    }
-    return true;
+    // if (!checkAuth(useUserStore(), item?.meta?.roles as string)) {
+    //   return false;
+    // }
+    // return true;
+    return checkAuth(useUserStore(), item?.meta?.roles as string);
   });
 });
 
-routerApi.afterEach((to, from, failure) => {
+routerApi.afterEach((to) => {
   searchKey.value = [to.path];
 });
 

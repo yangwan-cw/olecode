@@ -10,12 +10,18 @@
 </style>
 <script lang="ts" setup>
 import BasicLayout from "@/layouts/BasicLayout.vue";
-import { useRouter } from "vue-router";
-import useStore from "@/store";
+import { onMounted } from "vue";
 
-const router = useRouter();
-const { useUserStore } = useStore();
-const { loginUser } = useUserStore();
+const init = () => {
+  console.log("hello olecode!");
+};
+onMounted(() => {
+  init();
+});
+
+// const router = useRouter();
+// const { useUserStore } = useStore();
+// const { loginUser } = useUserStore();
 
 // router.beforeEach((to, from, next) => {
 //   // if (to.meta?.roles === "admin") {
