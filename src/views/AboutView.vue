@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import useStore from "@/store/index";
 import { storeToRefs } from "pinia";
 

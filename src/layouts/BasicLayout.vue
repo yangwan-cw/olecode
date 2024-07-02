@@ -16,6 +16,7 @@
             <img
               src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif"
               width="25"
+              alt=""
             />
           </div>
         </a>
@@ -25,11 +26,11 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import BasicHeader from "@/components/BasicHeader.vue";
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 #basic-layout {
   .basic-layout-content {
     background-color: #009cff;

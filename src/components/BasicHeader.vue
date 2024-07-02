@@ -1,13 +1,13 @@
 <template>
   <a-row
+    align="center"
     class="basic-component-header"
     style="margin-bottom: 16px"
-    align="center"
   >
     <a-col flex="auto">
       <a-menu
-        mode="horizontal"
         :selected-keys="searchKey"
+        mode="horizontal"
         style="align-items: center"
         @menu-item-click="toPage"
       >
@@ -34,7 +34,7 @@
     </a-col>
   </a-row>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { routes } from "@/router/routers";
 import router from "@/router";
 import { ref } from "vue";
@@ -48,6 +48,8 @@ const { useUserStore } = useStore();
 const { loginUser } = storeToRefs(useUserStore());
 
 routerApi.afterEach((to, from, failure) => {
+  console.log(from);
+  console.log(failure);
   searchKey.value = [to.path];
 });
 
@@ -58,7 +60,7 @@ const toPage = (key: string) => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .title-bar {
   display: flex;
   align-items: center;

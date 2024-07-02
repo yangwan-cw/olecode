@@ -7,7 +7,7 @@
         <button @click="goBack">Go Back</button>
       </div>
       <div class="image">
-        <img src="@/assets/403.png" alt="403 Forbidden" />
+        <img alt="403 Forbidden" src="@/assets/403.png" />
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@ const goBack = () => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .not-auth {
   display: flex;
   align-items: center;
