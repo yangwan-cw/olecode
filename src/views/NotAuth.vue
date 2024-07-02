@@ -2,7 +2,7 @@
   <div class="not-auth">
     <div class="container">
       <div class="content">
-        <h1>Ooops....</h1>
+        <h1>Oops....</h1>
         <p>Not auth</p>
         <button @click="goBack">Go Back</button>
       </div>

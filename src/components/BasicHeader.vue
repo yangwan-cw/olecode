@@ -1,9 +1,5 @@
 <template>
-  <a-row
-    align="center"
-    class="basic-component-header"
-    style="margin-bottom: 16px"
-  >
+  <a-row align="center" class="basic-component-header" :wrap="false">
     <a-col flex="auto">
       <a-menu
         :selected-keys="searchKey"
@@ -72,20 +68,20 @@ const toPage = (key: string) => {
   }
 }
 
-.logo {
-  height: 32px;
-  margin-top: 3px;
-}
+//.logo {
+//  height: 32px;
+//  margin-top: 3px;
+//}
 
 .user-info {
   display: flex;
   align-items: center;
 
-  .avatar {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    margin-right: 8px;
-  }
+  //.avatar {
+  //  height: 32px;
+  //  width: 32px;
+  //  border-radius: 50%;
+  //  margin-right: 8px;
+  //}
 }
 </style>

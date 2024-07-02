@@ -1,6 +1,6 @@
 <template>
   <div id="basic-layout">
-    <a-layout style="height: 400px">
+    <a-layout style="min-height: 100vh">
       <a-layout-header class="basic-layout-header">
         <BasicHeader />
       </a-layout-header>
@@ -35,13 +35,15 @@ import BasicHeader from "@/components/BasicHeader.vue";
   .basic-layout-content {
     background-color: #009cff;
     margin-bottom: 16px;
+    padding: 20px;
   }
 
   .basic-layout-footer {
+    background-color: red;
     font-size: 16px;
     text-align: center;
     padding: 16px;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     left: 0;
     right: 0;
