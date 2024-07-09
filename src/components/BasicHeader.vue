@@ -47,14 +47,14 @@ const { fetchAndUpdateUser } = useUserStore();
 
 const visibleTag = computed(() => {
   return routes.filter((item) => {
+    // 如果是有隐藏按钮，那么就不显示
     if (item.meta?.isHideTag) {
       return false;
     }
-    // if (!checkAuth(useUserStore(), item?.meta?.roles as string)) {
-    //   return false;
-    // }
-    // return true;
-    return checkAuth(useUserStore(), item?.meta?.roles as string);
+    if (!checkAuth(useUserStore(), item?.meta?.roles as string)) {
+      return false;
+    }
+    return true;
   });
 });
 

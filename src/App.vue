@@ -1,6 +1,11 @@
 <template>
   <div id="layout-app">
-    <basic-layout />
+    <template v-if="router.path.startsWith('/user')">
+      <router-view />
+    </template>
+    <template v-else>
+      <basic-layout />
+    </template>
   </div>
 </template>
 
@@ -11,25 +16,13 @@
 <script lang="ts" setup>
 import BasicLayout from "@/layouts/BasicLayout.vue";
 import { onMounted } from "vue";
+import { useRoute } from "vue-router";
 
+const router = useRoute();
 const init = () => {
-  console.log("hello olecode!");
+  console.log(router.path.startsWith("/user"));
 };
 onMounted(() => {
   init();
 });
-
-// const router = useRouter();
-// const { useUserStore } = useStore();
-// const { loginUser } = useUserStore();
-
-// router.beforeEach((to, from, next) => {
-//   // if (to.meta?.roles === "admin") {
-//   //   if (loginUser?.roles !== "admin") {
-//   //     next("/error");
-//   //     return;
-//   //   }
-//   // }
-//   // next();
-// });
 </script>

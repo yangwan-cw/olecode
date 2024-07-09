@@ -2,23 +2,45 @@ import { RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import AdminView from "@/views/AdminView.vue";
 import NotAuth from "@/views/NotAuth.vue";
+import AccessAuth from "@/auth/AccessAuth";
+import UserLayout from "@/layouts/UserLayout.vue";
+import UserLogin from "@/views/UserLogin.vue";
+import UserRegister from "@/views/UserRegister.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "首页",
-    component: HomeView,
+    path: "/user",
+    name: "用户",
+    component: UserLayout,
+    children: [
+      {
+        path: "/user/login",
+        name: "登录页面",
+        component: UserLogin,
+        meta: {
+          title: "登录页面",
+        },
+      },
+      {
+        path: "/user/register",
+        name: "注册页面",
+        component: UserRegister,
+        meta: {
+          title: "注册页面",
+        },
+      },
+    ],
     meta: {
-      title: "首页",
+      title: "用户",
+      isHideTag: true,
     },
   },
   {
-    path: "/admin",
-    name: "登录员可见",
-    component: AdminView,
+    path: "/",
+    name: "浏览题目",
+    component: HomeView,
     meta: {
-      title: "页面不存在",
-      roles: "admin",
+      title: "浏览题目",
     },
   },
   {
@@ -30,6 +52,16 @@ export const routes: Array<RouteRecordRaw> = [
       isHideTag: true,
     },
   },
+  {
+    path: "/admin",
+    name: "登录员可见",
+    component: AdminView,
+    meta: {
+      title: "管理员界面",
+      roles: AccessAuth.ADMIN,
+    },
+  },
+
   {
     path: "/about",
     name: "关于",

@@ -4,7 +4,13 @@ import router from "./router";
 import "@arco-design/web-vue/dist/arco.css";
 import ArcoVue from "@arco-design/web-vue";
 import { createPinia } from "pinia";
+import "@/plugin/axios";
+import "@/auth/index";
+const app = createApp(App);
 
-const pinia = createPinia();
+app.use(ArcoVue); // 使用 ArcoVue
+app.use(createPinia()); // 使用 Pinia
+app.use(router); // 使用路由
 
-createApp(App).use(ArcoVue).use(pinia).use(router).mount("#app");
+// 挂载应用程序
+app.mount("#app");

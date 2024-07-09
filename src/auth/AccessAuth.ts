@@ -1,5 +1,5 @@
 /**
- * 全局权限
+ * 全局权限常量
  */
 const ACCESSAUTH = {
   NOT_LOGIN: "notLogin",
