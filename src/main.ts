@@ -6,6 +6,8 @@ import ArcoVue from "@arco-design/web-vue";
 import { createPinia } from "pinia";
 import "@/plugin/axios";
 import "@/auth/index";
+import "bytemd/dist/index.css";
+
 const app = createApp(App);
 
 app.use(ArcoVue); // 使用 ArcoVue

@@ -82,20 +82,8 @@ fetchAndUpdateUser();
   }
 }
 
-//.logo {
-//  height: 32px;
-//  margin-top: 3px;
-//}
-
 .user-info {
   display: flex;
   align-items: center;
-
-  //.avatar {
-  //  height: 32px;
-  //  width: 32px;
-  //  border-radius: 50%;
-  //  margin-right: 8px;
-  //}
 }
 </style>
