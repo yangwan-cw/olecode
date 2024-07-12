@@ -1,34 +1,36 @@
 <template>
-  <a-row :wrap="false" align="center" class="basic-component-header">
-    <a-col flex="auto">
-      <a-menu
-        :selected-keys="searchKey"
-        mode="horizontal"
-        style="align-items: center"
-        @menu-item-click="toPage"
-      >
-        <a-menu-item
-          key="0"
-          :style="{ padding: 0, marginRight: '38px' }"
-          disabled
+  <div class="basic-component-header">
+    <a-row :wrap="false" align="center" class="dynamic-header">
+      <a-col flex="auto">
+        <a-menu
+          :selected-keys="searchKey"
+          mode="horizontal"
+          style="align-items: center"
+          @menu-item-click="toPage"
         >
-          <div class="title-bar">
-            <!--            <img class="logo" src="../assets/logo.png" />-->
-            <div class="olecode-vue3">OleCode-Vue3</div>
-          </div>
-        </a-menu-item>
-        <a-menu-item v-for="item in visibleTag" :key="item.path">
-          {{ item.name }}
-        </a-menu-item>
-      </a-menu>
-    </a-col>
-    <a-col flex="100px">
-      <div class="user-info">
-        <!--        <img class="avatar" src="../assets/logo.png" alt="Avatar" />-->
-        <div>{{ loginUser?.userName ?? "未登录" }}</div>
-      </div>
-    </a-col>
-  </a-row>
+          <a-menu-item
+            key="0"
+            :style="{ padding: 0, marginRight: '38px' }"
+            disabled
+          >
+            <div class="title-bar">
+              <!--            <img class="logo" src="../assets/logo.png" />-->
+              <div class="olecode-vue3">OleCode-Vue3</div>
+            </div>
+          </a-menu-item>
+          <a-menu-item v-for="item in visibleTag" :key="item.path">
+            {{ item.name }}
+          </a-menu-item>
+        </a-menu>
+      </a-col>
+      <a-col flex="100px">
+        <div class="user-info">
+          <!--        <img class="avatar" src="../assets/logo.png" alt="Avatar" />-->
+          <div>{{ loginUser?.userName ?? "未登录" }}</div>
+        </div>
+      </a-col>
+    </a-row>
+  </div>
 </template>
 <script lang="ts" setup>
 import { routes } from "@/router/routers";
@@ -71,6 +73,16 @@ fetchAndUpdateUser();
 </script>
 
 <style lang="less" scoped>
+.basic-component-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .dynamic-header {
+    width: @common-width;
+  }
+}
+
 .title-bar {
   display: flex;
   align-items: center;

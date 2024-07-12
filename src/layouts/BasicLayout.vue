@@ -5,22 +5,26 @@
         <BasicHeader />
       </a-layout-header>
       <a-layout-content class="basic-layout-content">
-        <router-view />
+        <div class="basic-layout-content-container">
+          <router-view />
+        </div>
       </a-layout-content>
       <a-layout-footer class="basic-layout-footer">
-        <p>oleCode-vue3</p>
-        由
-        <a href="https://github.com/yangwan-cw">
-          <div class="link-my-github">
-            ioomex....
-            <img
-              src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif"
-              width="25"
-              alt=""
-            />
-          </div>
-        </a>
-        所开发
+        <div class="basic-layout-footer-container">
+          <p>oleCode-vue3</p>
+          由
+          <a href="https://github.com/yangwan-cw">
+            <div class="link-my-github">
+              ioomex....
+              <img
+                alt=""
+                src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif"
+                width="25"
+              />
+            </div>
+          </a>
+          所开发
+        </div>
       </a-layout-footer>
     </a-layout>
   </div>
@@ -35,6 +39,12 @@ import BasicHeader from "@/components/BasicHeader.vue";
   .basic-layout-content {
     margin-bottom: 16px;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .basic-layout-content-container {
+      width: @common-width;
+    }
   }
 
   .basic-layout-footer {
@@ -45,7 +55,12 @@ import BasicHeader from "@/components/BasicHeader.vue";
     bottom: 0;
     left: 0;
     right: 0;
+    display: flex;
+    justify-content: center;
 
+    .basic-layout-footer-container {
+      width: @common-width;
+    }
     a {
       text-decoration: none;
       color: @font-color;
