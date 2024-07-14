@@ -14,7 +14,8 @@
       @ok="handleOk"
     >
       <template #header>
-        <span>新增题目基本信息</span>
+        <span v-if="currentStep === 1">题目基本信息</span>
+        <span v-else-if="currentStep === 2">题目配置信息</span>
       </template>
       <div class="question_container">
         <div class="question_step">
@@ -236,6 +237,7 @@
 import { computed, nextTick, reactive, ref } from "vue";
 import MdEditor from "@/components/MdEditor.vue";
 import { QuestionControllerService } from "../../../generated";
+import message from "@arco-design/web-vue/es/message";
 
 interface question {
   answer?: string;
@@ -375,23 +377,14 @@ const submitData = () => {
     .then((res) => {
       console.log(res);
       if (res.code === 200) {
-        // notification.success({
-        //   message: "成功",
-        //   description: "问题已成功添加",
-        // });
+        message.success("成功");
         visible.value = false;
       } else {
-        // notification.error({
-        //   message: "错误",
-        //   description: "问题添加失败，请重试",
-        // });
+        message.error("错误");
       }
     })
     .catch((err) => {
-      // notification.error({
-      //   message: "错误",
-      //   description: "问题添加失败，请重试",
-      // });
+      message.error("错误");
     });
 };
 </script>
