@@ -6,6 +6,7 @@ import AccessAuth from "@/auth/AccessAuth";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLogin from "@/views/UserLogin.vue";
 import UserRegister from "@/views/UserRegister.vue";
+import AddQuestion from "@/views/question/AddQuestion.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -41,6 +42,14 @@ export const routes: Array<RouteRecordRaw> = [
     component: HomeView,
     meta: {
       title: "浏览题目",
+    },
+  },
+  {
+    path: "/add/addquestion",
+    name: "新增题目",
+    component: AddQuestion,
+    meta: {
+      title: "新增题目",
     },
   },
   {

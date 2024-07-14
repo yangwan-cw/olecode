@@ -7,6 +7,7 @@ export const useUserStore = defineStore("user", {
   state: (): UserState => ({
     loginUser: {
       userName: "未登录",
+      userAvatar: "",
       // roles: AccessAuth.NOT_LOGIN,
     },
   }),
@@ -14,9 +15,10 @@ export const useUserStore = defineStore("user", {
     getUserName: (state: UserState) => state.loginUser.userName,
   },
   actions: {
-    updateUser(userName: string, roles: string) {
+    updateUser(userName: string, roles: string, userAvatar: string) {
       this.loginUser.userName = userName;
       this.loginUser.roles = roles;
+      this.loginUser.userAvatar = userAvatar;
     },
     async fetchAndUpdateUser() {
       // 模拟异步操作，例如从 API 获取用户数据
@@ -25,10 +27,11 @@ export const useUserStore = defineStore("user", {
       if (userData.code === 200) {
         this.updateUser(
           userData.data?.userName as string,
-          userData.data?.userRole as string
+          userData.data?.userRole as string,
+          userData.data?.userAvatar as string
         );
       } else {
-        this.updateUser("请登录", AccessAuth.NOT_LOGIN);
+        this.updateUser("请登录", AccessAuth.NOT_LOGIN, "");
       }
     },
   },

@@ -416,7 +416,8 @@ export class Service {
   }
 
   /**
-   * addUser
+   * 创建用户
+   * 创建
    * @param userAddRequest userAddRequest
    * @returns BaseResponse_long_ OK
    * @returns any Created
@@ -438,7 +439,8 @@ export class Service {
   }
 
   /**
-   * deleteUser
+   * 删除用户
+   * 删除
    * @param deleteRequest deleteRequest
    * @returns BaseResponse_boolean_ OK
    * @returns any Created
@@ -460,7 +462,8 @@ export class Service {
   }
 
   /**
-   * getUserById
+   * 根据 id 获取用户仅管理员
+   * 更新
    * @param id id
    * @returns BaseResponse_SysUser_ OK
    * @throws ApiError
@@ -483,7 +486,8 @@ export class Service {
   }
 
   /**
-   * getLoginUser
+   * 获取当前登录用户
+   * 获取
    * @returns BaseResponse_LoginUserVO_ OK
    * @throws ApiError
    */
@@ -500,7 +504,8 @@ export class Service {
   }
 
   /**
-   * getUserVOById
+   * 根据 id 获取包装类
+   * 获取
    * @param id id
    * @returns BaseResponse_UserVO_ OK
    * @throws ApiError
@@ -523,7 +528,8 @@ export class Service {
   }
 
   /**
-   * listUserByPage
+   * 分页获取用户列表（仅管理员）
+   * 分页获取
    * @param userQueryRequest userQueryRequest
    * @returns BaseResponse_Page_SysUser_ OK
    * @returns any Created
@@ -545,7 +551,8 @@ export class Service {
   }
 
   /**
-   * listUserVOByPage
+   * 分页获取用户封装列表
+   * 分页获取
    * @param userQueryRequest userQueryRequest
    * @returns BaseResponse_Page_UserVO_ OK
    * @returns any Created
@@ -567,7 +574,8 @@ export class Service {
   }
 
   /**
-   * userLogin
+   * 用户登录
+   * 登录
    * @param userLoginRequest userLoginRequest
    * @returns BaseResponse_LoginUserVO_ OK
    * @returns any Created
@@ -589,7 +597,8 @@ export class Service {
   }
 
   /**
-   * userLoginByWxOpen
+   * 用户登录（微信开放平台）
+   * 用户登录微信
    * @param code code
    * @returns BaseResponse_LoginUserVO_ OK
    * @throws ApiError
@@ -612,7 +621,8 @@ export class Service {
   }
 
   /**
-   * userLogout
+   * 用户注销
+   * 注销
    * @returns BaseResponse_boolean_ OK
    * @returns any Created
    * @throws ApiError
@@ -633,6 +643,7 @@ export class Service {
 
   /**
    * 注册接口
+   * 注册
    * @param userRegisterRequest userRegisterRequest
    * @returns BaseResponse_long_ OK
    * @returns any Created
@@ -654,7 +665,8 @@ export class Service {
   }
 
   /**
-   * updateUser
+   * 更新用户
+   * 更新
    * @param userUpdateRequest userUpdateRequest
    * @returns BaseResponse_boolean_ OK
    * @returns any Created
@@ -676,7 +688,8 @@ export class Service {
   }
 
   /**
-   * updateMyUser
+   * 更新个人信息
+   * 更新
    * @param userUpdateMyRequest userUpdateMyRequest
    * @returns BaseResponse_boolean_ OK
    * @returns any Created

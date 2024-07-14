@@ -7,6 +7,7 @@ import { createPinia } from "pinia";
 import "@/plugin/axios";
 import "@/auth/index";
 import "bytemd/dist/index.css";
+import "@/style/style.css";
 
 const app = createApp(App);
 

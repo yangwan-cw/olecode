@@ -25,17 +25,54 @@
       </a-col>
       <a-col flex="100px">
         <div class="user-info">
-          <!--        <img class="avatar" src="../assets/logo.png" alt="Avatar" />-->
+          <div class="avatar-container">
+            <a-avatar class="avatar" :imageUrl="loginUser?.userAvatar">
+            </a-avatar>
+            <!--            <img alt="Avatar" class="avatar" src="../assets/pink_dog.jpeg" />-->
+            <!--            <a-badge class="avatar-status" status="danger" />-->
+          </div>
           <div>{{ loginUser?.userName ?? "未登录" }}</div>
         </div>
       </a-col>
+      <div class="basic-component-header-icon">
+        <a-col flex="30%">
+          <a href="https://github.com/yangwan-cw">
+            <github-one fill="#000000" size="24" theme="outline" />
+          </a>
+        </a-col>
+        <a-col
+          flex="30%"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <a href="https://cn.vuejs.org/">
+            <svg
+              height="24"
+              style="fill: rgb(65, 184, 131); transform: ; msfilter: "
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m12 12.765 5.592-9.437h-3.276L12 7.33v.002L9.688 3.328h-3.28z"
+              ></path>
+              <path
+                d="M18.461 3.332 12 14.235 5.539 3.332H1.992L12 20.672l10.008-17.34z"
+              ></path>
+            </svg>
+          </a>
+          <a href="https://cn.vuejs.org/">
+            <p>{{ version }}</p></a
+          >
+        </a-col>
+      </div>
     </a-row>
   </div>
 </template>
 <script lang="ts" setup>
 import { routes } from "@/router/routers";
 import router from "@/router";
-import { computed, ref } from "vue";
+import { computed, ref, version } from "vue";
+import { GithubOne } from "@icon-park/vue-next";
 import { useRouter } from "vue-router";
 import useStore from "@/store/index";
 import { storeToRefs } from "pinia";
@@ -78,8 +115,20 @@ fetchAndUpdateUser();
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid;
+  border-color: #00000014;
+
   .dynamic-header {
     width: @common-width;
+  }
+
+  .basic-component-header-icon {
+    display: flex;
+    align-items: center;
+
+    p {
+      color: #41b883;
+    }
   }
 }
 
@@ -94,8 +143,30 @@ fetchAndUpdateUser();
   }
 }
 
+//.logo {
+//  height: 32px;
+//  margin-top: 3px;
+//}
+
 .user-info {
   display: flex;
   align-items: center;
+
+  .avatar-container {
+    position: relative;
+
+    .avatar {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .avatar-status {
+      position: absolute;
+      bottom: 0;
+      right: 13px;
+    }
+  }
 }
 </style>
