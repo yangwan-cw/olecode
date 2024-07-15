@@ -41,7 +41,7 @@ import BasicHeader from "@/components/BasicHeader.vue";
     padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    //align-items: center;
     .basic-layout-content-container {
       width: @common-width;
     }

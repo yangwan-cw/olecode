@@ -1,6 +1,6 @@
 <template>
   <div id="addQuestion">
-    <div :style="{ marginTop: '20px' }">
+    <div>
       <a-button type="primary" @click="handleClick">新增问题</a-button>
     </div>
 
@@ -236,7 +236,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, reactive, ref } from "vue";
 import MdEditor from "@/components/MdEditor.vue";
-import { QuestionControllerService } from "../../../generated";
+import { QuestionControllerService } from "../../generated";
 import message from "@arco-design/web-vue/es/message";
 
 interface question {

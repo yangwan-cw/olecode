@@ -6,7 +6,8 @@ import AccessAuth from "@/auth/AccessAuth";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLogin from "@/views/UserLogin.vue";
 import UserRegister from "@/views/UserRegister.vue";
-import AddQuestion from "@/views/question/AddQuestion.vue";
+import AddQuestion from "@/components/AddQuestionComponent.vue";
+import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -45,12 +46,9 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/add/addquestion",
-    name: "新增题目",
-    component: AddQuestion,
-    meta: {
-      title: "新增题目",
-    },
+    path: "/manage/question/",
+    name: "管理题目",
+    component: ManageQuestionView,
   },
   {
     path: "/error",
