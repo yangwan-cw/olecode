@@ -1,5 +1,5 @@
 <template>
-  <div id="code-editor" ref="codeEditorRef" style="min-height: 400px" />
+  <div id="code-editor" ref="codeEditorRef" style="min-height: 600px" />
   <!--  <a-button @click="fillValue">填充值</a-button>-->
 </template>
 

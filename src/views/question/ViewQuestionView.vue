@@ -10,16 +10,16 @@
                 :column="{ xs: 1, md: 2, lg: 3 }"
               >
                 <a-descriptions-item label="时间限制">
-                  {{ question.judgeConfig.timeLimit ?? 0 }}
+                  {{ question?.judgeConfig?.timeLimit ?? 0 }}
                 </a-descriptions-item>
                 <a-descriptions-item label="内存限制">
-                  {{ question.judgeConfig.memoryLimit ?? 0 }}
+                  {{ question?.judgeConfig?.memoryLimit ?? 0 }}
                 </a-descriptions-item>
                 <a-descriptions-item label="堆栈限制">
-                  {{ question.judgeConfig.stackLimit ?? 0 }}
+                  {{ question?.judgeConfig?.stackLimit ?? 0 }}
                 </a-descriptions-item>
               </a-descriptions>
-              <MdEditor :value="question.content || ''" />
+              <MdViewer :value="question.content || ''" />
               <template #extra>
                 <a-space wrap>
                   <a-tag
@@ -72,7 +72,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watchEffect, withDefaults, defineProps } from "vue";
 import {
-  Question,
   QuestionControllerService,
   QuestionSubmitAddRequest,
   QuestionSubmitControllerService,
@@ -80,7 +79,7 @@ import {
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import CodeEditor from "@/components/CodeEditor.vue";
-import MdEditor from "@/components/MdEditor.vue";
+import MdViewer from "@/components/MdViewer.vue";
 
 interface Props {
   id: string;
@@ -98,6 +97,8 @@ const loadData = async () => {
   );
   if (res.code === 200) {
     question.value = res.data;
+
+    console.log(question.value);
   } else {
     message.error("加载失败，" + res.message);
   }
@@ -120,7 +121,7 @@ const doSubmit = async () => {
     ...form.value,
     questionId: question.value.id,
   });
-  if (res.code === 0) {
+  if (res.code === 200) {
     message.success("提交成功");
   } else {
     message.error("提交失败," + res.message);
