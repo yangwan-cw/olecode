@@ -78,7 +78,7 @@
                   @click="handleEdit"
                 >
                   <template #icon>
-                    <icon-plus />
+                    <!--                    <icon-plus />-->
                   </template>
                   添加语言标签
                 </a-tag>
@@ -124,10 +124,10 @@
                       placeholder="请输入内存限制"
                     >
                       <template #plus>
-                        <icon-plus />
+                        <!--                        <icon-plus />-->
                       </template>
                       <template #minus>
-                        <icon-minus />
+                        <!--                        <icon-minus />-->
                       </template>
                     </a-input-number>
                   </a-space>
@@ -142,10 +142,10 @@
                       placeholder="请输入堆栈限制"
                     >
                       <template #plus>
-                        <icon-plus />
+                        <!--                        <icon-plus />-->
                       </template>
                       <template #minus>
-                        <icon-minus />
+                        <!--                        <icon-minus />-->
                       </template>
                     </a-input-number>
                   </a-space>
@@ -160,10 +160,10 @@
                       placeholder="请输入时间限制"
                     >
                       <template #plus>
-                        <icon-plus />
+                        <!--                        <icon-plus />-->
                       </template>
                       <template #minus>
-                        <icon-minus />
+                        <!--                        <icon-minus />-->
                       </template>
                     </a-input-number>
                   </a-space>
@@ -234,7 +234,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, reactive, ref } from "vue";
+import {
+  computed,
+  defineProps,
+  nextTick,
+  reactive,
+  ref,
+  withDefaults,
+} from "vue";
 import MdEditor from "@/components/MdEditor.vue";
 import { QuestionControllerService } from "../../generated";
 import message from "@arco-design/web-vue/es/message";
@@ -245,7 +252,7 @@ interface question {
   title: string;
   tags: Array<string>;
 
-  judgeCase?: [
+  judgeCase: [
     {
       input: string;
       output: string;
@@ -387,6 +394,19 @@ const submitData = () => {
       message.error("错误");
     });
 };
+
+interface InitialData {
+  // 在这里定义 initialData 的具体结构
+  visible: boolean;
+  initial: any;
+}
+
+const props = withDefaults(defineProps<InitialData>(), {
+  visible: true,
+  initialData: {},
+});
+console.log("visible", props.visible);
+console.log("initialData", props.initialData);
 </script>
 
 <style lang="less" scoped>

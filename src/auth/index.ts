@@ -1,6 +1,7 @@
 import { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import useStore from "@/store";
 import AccessAuth from "@/auth/AccessAuth";
+import ACCESSAUTH from "@/auth/AccessAuth";
 import checkAccess from "@/auth/CheckAccess";
 import router from "@/router/index";
 
@@ -23,7 +24,11 @@ router.beforeEach(
     // 要跳转的页面必须要登录,不需要登录的页面直接跳转过去
     if (needAccess !== AccessAuth.NOT_LOGIN) {
       // 如果没有登录，跳转到登录页面
-      if (!loginUser || !loginUser.roles) {
+      if (
+        !loginUser ||
+        !loginUser.roles ||
+        loginUser.roles === ACCESSAUTH.NOT_LOGIN
+      ) {
         next(`/user/login?redirect=${to.fullPath}`);
         return;
       }

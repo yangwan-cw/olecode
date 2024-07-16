@@ -1,7 +1,11 @@
 <template>
   <div id="manageQuestionView">
     <div class="top_operation">
-      <add-question class="add_question" />
+      <AddQuestion
+        :initial="editData"
+        :visible="drawerVisible"
+        class="add_question"
+      />
       <a-button :loading="loading" type="primary" @click="refreshData()"
         >刷新
       </a-button>
@@ -13,13 +17,14 @@
       :pagination="{
         showTotal: true,
         pageSize: searchParams.pageSize,
-        current: searchParams.pageNum,
+        current: searchParams.current,
         total,
       }"
+      @page-change="onPageChange"
     >
       <template #optional="{ record }">
         <a-space>
-          <a-button type="primary" @click="doUpdate(record)"> 修改</a-button>
+          <!--          <a-button type="primary" @click="doUpdate(record)"> 修改</a-button>-->
           <a-button status="danger" @click="doDelete(record)">删除</a-button>
         </a-space>
       </template>
@@ -28,10 +33,13 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
-import { Question, QuestionControllerService } from "../../../generated";
+import { onMounted, ref, watchEffect } from "vue";
+import {
+  Question,
+  QuestionControllerService,
+  QuestionVO,
+} from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
-import { useRouter } from "vue-router";
 import AddQuestion from "@/components/AddQuestionComponent.vue";
 import { throttle } from "radash";
 
@@ -41,11 +49,14 @@ const tableRef = ref();
 const dataList = ref([]);
 const total = ref(0);
 
+const drawerVisible = ref(false);
+const editData = ref({});
+
 const loading = ref(false);
 
 const searchParams = ref({
-  pageSize: 10,
-  pageNum: 1,
+  pageSize: 5,
+  current: 1,
 });
 
 const loadData = async () => {
@@ -54,7 +65,7 @@ const loadData = async () => {
   );
   if (res.code === 200) {
     dataList.value = res.data.records;
-    total.value = res.data.total;
+    total.value = Number(res.data.total);
     loading.value = false; // 加载完成，隐藏加载状态
   } else {
     message.error("加载失败，" + res.message);
@@ -125,7 +136,7 @@ const doDelete = async (question: Question) => {
   const res = await QuestionControllerService.deleteQuestionUsingPost({
     id: question.id,
   });
-  if (res.code === 0) {
+  if (res.code === 200) {
     message.success("删除成功");
     loadData();
   } else {
@@ -133,15 +144,18 @@ const doDelete = async (question: Question) => {
   }
 };
 
-const router = useRouter();
+const doUpdate = async (question: Question) => {
+  // 定义新增和编辑接口，读取到父组件传递下来的数据，里面包括 visible 和 请求过后的数据
+  // console.log(question);
+  // const jsonString =
+  //   '{\\"timeLimit\\":1000,\\"memoryLimit\\":1000,\\"stackLimit\\":1000}';
+  // const correctedJsonString = jsonString.replace(/\\"/g, '"');
+  // const jsonObject = JSON.parse(correctedJsonString);
+  // console.log(jsonObject);
 
-const doUpdate = (question: Question) => {
-  router.push({
-    path: "/update/question",
-    query: {
-      id: question.id,
-    },
-  });
+  console.log(question);
+  editData.value = question as QuestionVO;
+  drawerVisible.value = true;
 };
 
 // const refreshData = () => {
@@ -152,14 +166,28 @@ const doUpdate = (question: Question) => {
 // };
 
 // 节流刷新数据函数
-const throttledRefreshData = throttle({ interval: 3000 }, async () => {
+const throttledRefreshData = throttle({ interval: 1000 }, () => {
   loading.value = true; // 开始加载数据，显示加载状态
-  await loadData(); // 执行数据加载
+  // loadData(); // 执行数据加载
+  setTimeout(async () => {
+    await loadData(); // 执行数据加载
+  }, 500);
 }); // 设置节流时间为 3000 毫秒（即 3 秒）
 
 const refreshData = () => {
   throttledRefreshData(); // 调用节流函数以刷新数据
 };
+
+const onPageChange = (page: number) => {
+  searchParams.value = {
+    ...searchParams.value,
+    current: page,
+  };
+};
+
+watchEffect(() => {
+  loadData();
+});
 </script>
 
 <style scoped>

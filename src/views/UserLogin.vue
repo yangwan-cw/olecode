@@ -49,12 +49,17 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import checkParam from "@/util/checkParam";
-import { Message } from "@arco-design/web-vue";
+import { Message, Notification } from "@arco-design/web-vue";
 import { Service } from "../../generated";
+import { useRouter } from "vue-router";
+import useStore from "@/store";
 
 const username = ref("");
 const password = ref("");
+const router = useRouter();
 
+const { useUserStore } = useStore();
+const { fetchAndUpdateUser } = useUserStore();
 const handleLogin = () => {
   const error = checkParam(username.value, password.value) as string;
   if (error) {
@@ -63,7 +68,26 @@ const handleLogin = () => {
     Service.userLoginUsingPost({
       userAccount: username.value,
       userPassword: password.value,
-    });
+    })
+      .then(async (res) => {
+        console.log(res);
+        if (res.code === 200) {
+          Notification.info({
+            title: "登录成功",
+            content: "",
+          });
+          await fetchAndUpdateUser();
+          router.push({ path: "/", replace: true });
+        } else {
+          Notification.error({
+            title: res.message,
+            content: "",
+          });
+        }
+      })
+      .catch((err) => {
+        Message.error(err);
+      });
   }
 };
 </script>
