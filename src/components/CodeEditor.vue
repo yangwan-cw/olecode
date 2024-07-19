@@ -5,7 +5,7 @@
 
 <script lang="ts" setup>
 import * as monaco from "monaco-editor";
-import { defineProps, onMounted, ref, toRaw, withDefaults } from "vue";
+import { defineProps, onMounted, ref, toRaw, watch, withDefaults } from "vue";
 
 /**
  * 定义组件属性类型
@@ -13,6 +13,7 @@ import { defineProps, onMounted, ref, toRaw, withDefaults } from "vue";
 interface Props {
   value: string;
   handleChange: (v: string) => void;
+  language: "";
 }
 
 /**
@@ -23,6 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
   handleChange: (v: string) => {
     console.log(v);
   },
+  language: "",
 });
 
 const codeEditorRef = ref();
@@ -36,14 +38,24 @@ const fillValue = () => {
   toRaw(codeEditor.value).setValue("新的值");
 };
 
+watch(
+  () => props.language,
+  () => {
+    if (codeEditor.value) {
+      monaco.editor.setModelLanguage(
+        toRaw(codeEditor.value).getModel(),
+        props.language
+      );
+    }
+  }
+);
 onMounted(() => {
   if (!codeEditorRef.value) {
     return;
   }
-  // Hover on each property to see its docs!
   codeEditor.value = monaco.editor.create(codeEditorRef.value, {
     value: props.value,
-    language: "java",
+    language: props.language,
     automaticLayout: true,
     colorDecorators: true,
     minimap: {
@@ -51,13 +63,15 @@ onMounted(() => {
     },
     readOnly: false,
     theme: "vs-dark",
-    // lineNumbers: "off",
-    // roundedSelection: false,
-    // scrollBeyondLastLine: false,
+    lineNumbers: "off",
+    roundedSelection: false,
+    scrollBeyondLastLine: false,
   });
 
   // 编辑 监听内容变化
   codeEditor.value.onDidChangeModelContent(() => {
+    console.log(props);
+
     props.handleChange(toRaw(codeEditor.value).getValue());
   });
 });

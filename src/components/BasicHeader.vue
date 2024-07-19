@@ -14,11 +14,16 @@
             disabled
           >
             <div class="title-bar">
-              <!--            <img class="logo" src="../assets/logo.png" />-->
+              <img class="logo" src="../../public/logo.png" />
               <div class="olecode-vue3">OleCode-Vue3</div>
             </div>
           </a-menu-item>
+          <!--         设置图标  -->
           <a-menu-item v-for="item in visibleTag" :key="item.path">
+            <template #icon>
+              <component :is="item?.meta?.icon" />
+              <!--              <IconHome />-->
+            </template>
             {{ item.name }}
           </a-menu-item>
         </a-menu>
@@ -26,7 +31,7 @@
       <a-col flex="100px">
         <div class="user-info">
           <div class="avatar-container">
-            <a-avatar class="avatar" :imageUrl="loginUser?.userAvatar">
+            <a-avatar :imageUrl="loginUser?.userAvatar" class="avatar">
             </a-avatar>
             <!--            <img alt="Avatar" class="avatar" src="../assets/pink_dog.jpeg" />-->
             <!--            <a-badge class="avatar-status" status="danger" />-->
@@ -119,7 +124,7 @@ fetchAndUpdateUser();
   border-color: #00000014;
 
   .dynamic-header {
-    width: @common-width;
+    width: @header-width;
   }
 
   .basic-component-header-icon {
@@ -143,10 +148,10 @@ fetchAndUpdateUser();
   }
 }
 
-//.logo {
-//  height: 32px;
-//  margin-top: 3px;
-//}
+.logo {
+  height: 32px;
+  margin-top: 3px;
+}
 
 .user-info {
   display: flex;

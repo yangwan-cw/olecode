@@ -10,6 +10,11 @@ import AddQuestion from "@/components/AddQuestionComponent.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
+import SystemInfo from "@/views/SystemInfo.vue";
+import Feedback from "@/views/Feedback.vue";
+import { IconUpload } from "@arco-design/web-vue/es/icon";
+
+// import { IconPlus, IconCheckCircle } from "@arco-design/web-vue/es/icon";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -41,11 +46,12 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
-    name: "浏览题目",
+    name: "题库",
     component: QuestionsView,
     meta: {
       title: "浏览题目",
       roles: AccessAuth.USER,
+      icon: "IconHome",
     },
   },
   {
@@ -55,6 +61,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       title: "浏览题目",
       roles: AccessAuth.ADMIN,
+      icon: "icon-code-square",
     },
   },
   {
@@ -76,24 +83,34 @@ export const routes: Array<RouteRecordRaw> = [
       isHideTag: true,
     },
   },
-  // {
-  //   path: "/admin",
-  //   name: "登录员可见",
-  //   component: AdminView,
-  //   meta: {
-  //     title: "管理员界面",
-  //     roles: AccessAuth.ADMIN,
-  //   },
-  // },
-
-  // {
-  //   path: "/about",
-  //   name: "关于",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  //   meta: { title: "关于页面" },
-  // },
+  {
+    path: "/system",
+    name: "系统设置",
+    component: SystemInfo,
+    meta: {
+      title: "系统模块",
+      roles: AccessAuth.ADMIN,
+      icon: "IconSettings",
+    },
+  },
+  {
+    path: "/feedback",
+    name: "关于 & 反馈",
+    component: SystemInfo,
+    meta: {
+      title: "反馈模块",
+      roles: AccessAuth.USER,
+      icon: "IconEmail",
+    },
+  },
+  {
+    path: "/message",
+    name: "消息",
+    component: SystemInfo,
+    meta: {
+      title: "消息模块",
+      roles: AccessAuth.ADMIN,
+      icon: "IconMessage",
+    },
+  },
 ];
