@@ -164,27 +164,6 @@ const doSubmit = () => {
     current: 1,
   };
 };
-
-// 监听 searchParams 变量的变化，改变时触发页面的重新加载
-// watch(
-//   () => searchParams.value.title,
-//   () => {
-//     // 重置当前页号
-//     searchParams.value.current = 1;
-//     loadData();
-//   }
-// );
-// 1;
-//
-// watch(
-//   () => searchParams.value.tags,
-//   () => {
-//     // 重置当前页号
-//     searchParams.value.current = 1;
-//     loadData();
-//   },
-//   { deep: true }
-// );
 </script>
 
 <style scoped>

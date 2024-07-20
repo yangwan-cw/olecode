@@ -117,6 +117,11 @@ const doSubmit = async () => {
     return;
   }
 
+  //  提交之前的判断
+  if (form.value.code === "") {
+    message.error("代码不能为空");
+    return;
+  }
   const res = await QuestionSubmitControllerService.doQuestionSubmitUsingPost({
     ...form.value,
     questionId: question.value.id,
