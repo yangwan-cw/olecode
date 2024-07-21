@@ -79,8 +79,6 @@ onMounted(() => {
   loadData();
 });
 
-// {id: "1", title: "A+ D", content: "新的题目内容", tags: "["二叉树"]", answer: "新的答案", submitNum: 0,…}
-
 const columns = [
   {
     title: "id",
@@ -138,7 +136,7 @@ const doDelete = async (question: Question) => {
   });
   if (res.code === 200) {
     message.success("删除成功");
-    loadData();
+    await loadData();
   } else {
     message.error("删除失败");
   }
