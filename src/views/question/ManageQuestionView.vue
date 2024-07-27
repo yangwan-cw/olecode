@@ -34,11 +34,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watchEffect } from "vue";
-import {
-  Question,
-  QuestionControllerService,
-  QuestionVO,
-} from "../../../generated";
+import { Question, QuestionVO, Service } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import AddQuestion from "@/components/AddQuestionComponent.vue";
 import { throttle } from "radash";
@@ -60,9 +56,7 @@ const searchParams = ref({
 });
 
 const loadData = async () => {
-  const res = await QuestionControllerService.listQuestionByPageUsingPost(
-    searchParams.value
-  );
+  const res = await Service.listQuestionByPageUsingPost(searchParams.value);
   if (res.code === 200) {
     dataList.value = res.data.records;
     total.value = Number(res.data.total);
@@ -131,7 +125,7 @@ const columns = [
 ];
 
 const doDelete = async (question: Question) => {
-  const res = await QuestionControllerService.deleteQuestionUsingPost({
+  const res = await Service.deleteQuestionUsingPost({
     id: question.id,
   });
   if (res.code === 200) {

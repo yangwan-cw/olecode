@@ -3,25 +3,24 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BaseResponse_boolean_ } from "../models/BaseResponse_boolean_";
-import type { BaseResponse_int_ } from "../models/BaseResponse_int_";
 import type { BaseResponse_LoginUserVO_ } from "../models/BaseResponse_LoginUserVO_";
 import type { BaseResponse_long_ } from "../models/BaseResponse_long_";
-import type { BaseResponse_Page_Post_ } from "../models/BaseResponse_Page_Post_";
-import type { BaseResponse_Page_PostVO_ } from "../models/BaseResponse_Page_PostVO_";
+import type { BaseResponse_Page_Question_ } from "../models/BaseResponse_Page_Question_";
+import type { BaseResponse_Page_QuestionSubmitVO_ } from "../models/BaseResponse_Page_QuestionSubmitVO_";
+import type { BaseResponse_Page_QuestionVO_ } from "../models/BaseResponse_Page_QuestionVO_";
 import type { BaseResponse_Page_SysUser_ } from "../models/BaseResponse_Page_SysUser_";
 import type { BaseResponse_Page_UserVO_ } from "../models/BaseResponse_Page_UserVO_";
-import type { BaseResponse_PostVO_ } from "../models/BaseResponse_PostVO_";
+import type { BaseResponse_QuestionVO_ } from "../models/BaseResponse_QuestionVO_";
 import type { BaseResponse_string_ } from "../models/BaseResponse_string_";
 import type { BaseResponse_SysUser_ } from "../models/BaseResponse_SysUser_";
 import type { BaseResponse_UserVO_ } from "../models/BaseResponse_UserVO_";
 import type { DeleteRequest } from "../models/DeleteRequest";
-import type { PostAddRequest } from "../models/PostAddRequest";
-import type { PostEditRequest } from "../models/PostEditRequest";
-import type { PostFavourAddRequest } from "../models/PostFavourAddRequest";
-import type { PostFavourQueryRequest } from "../models/PostFavourQueryRequest";
-import type { PostQueryRequest } from "../models/PostQueryRequest";
-import type { PostThumbAddRequest } from "../models/PostThumbAddRequest";
-import type { PostUpdateRequest } from "../models/PostUpdateRequest";
+import type { QuestionAddRequest } from "../models/QuestionAddRequest";
+import type { QuestionEditRequest } from "../models/QuestionEditRequest";
+import type { QuestionQueryRequest } from "../models/QuestionQueryRequest";
+import type { QuestionSubmitAddRequest } from "../models/QuestionSubmitAddRequest";
+import type { QuestionSubmitQueryRequest } from "../models/QuestionSubmitQueryRequest";
+import type { QuestionUpdateRequest } from "../models/QuestionUpdateRequest";
 import type { UserAddRequest } from "../models/UserAddRequest";
 import type { UserLoginRequest } from "../models/UserLoginRequest";
 import type { UserQueryRequest } from "../models/UserQueryRequest";
@@ -112,19 +111,18 @@ export class Service {
   }
 
   /**
-   * addPost
-   * @param postAddRequest postAddRequest
+   * @param questionAddRequest questionAddRequest
    * @returns BaseResponse_long_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static addPostUsingPost(
-    postAddRequest: PostAddRequest
+  public static addQuestionUsingPost(
+    questionAddRequest: QuestionAddRequest
   ): CancelablePromise<BaseResponse_long_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/add",
-      body: postAddRequest,
+      url: "/api/question/add",
+      body: questionAddRequest,
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,
@@ -134,18 +132,19 @@ export class Service {
   }
 
   /**
-   * deletePost
+   * 删除题目
+   * 删除题目
    * @param deleteRequest deleteRequest
    * @returns BaseResponse_boolean_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static deletePostUsingPost(
+  public static deleteQuestionUsingPost(
     deleteRequest: DeleteRequest
   ): CancelablePromise<BaseResponse_boolean_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/delete",
+      url: "/api/question/delete",
       body: deleteRequest,
       errors: {
         401: `Unauthorized`,
@@ -156,19 +155,20 @@ export class Service {
   }
 
   /**
-   * editPost
-   * @param postEditRequest postEditRequest
+   * 编辑（用户）
+   * 编辑（用户）
+   * @param questionEditRequest questionEditRequest
    * @returns BaseResponse_boolean_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static editPostUsingPost(
-    postEditRequest: PostEditRequest
+  public static editQuestionUsingPost(
+    questionEditRequest: QuestionEditRequest
   ): CancelablePromise<BaseResponse_boolean_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/edit",
-      body: postEditRequest,
+      url: "/api/question/edit",
+      body: questionEditRequest,
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,
@@ -178,17 +178,18 @@ export class Service {
   }
 
   /**
-   * getPostVOById
+   * 根据 id 获取
+   * 根据 id 获取
    * @param id id
-   * @returns BaseResponse_PostVO_ OK
+   * @returns BaseResponse_QuestionVO_ OK
    * @throws ApiError
    */
-  public static getPostVoByIdUsingGet(
+  public static getQuestionVoByIdUsingGet(
     id?: number
-  ): CancelablePromise<BaseResponse_PostVO_> {
+  ): CancelablePromise<BaseResponse_QuestionVO_> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/api/post/get/vo",
+      url: "/api/question/get/vo",
       query: {
         id: id,
       },
@@ -201,19 +202,20 @@ export class Service {
   }
 
   /**
-   * listPostByPage
-   * @param postQueryRequest postQueryRequest
-   * @returns BaseResponse_Page_Post_ OK
+   * 分页获取题目列表（仅管理员）
+   * 分页获取题目列表（仅管理员）
+   * @param questionQueryRequest questionQueryRequest
+   * @returns BaseResponse_Page_Question_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static listPostByPageUsingPost(
-    postQueryRequest: PostQueryRequest
-  ): CancelablePromise<BaseResponse_Page_Post_ | any> {
+  public static listQuestionByPageUsingPost(
+    questionQueryRequest: QuestionQueryRequest
+  ): CancelablePromise<BaseResponse_Page_Question_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/list/page",
-      body: postQueryRequest,
+      url: "/api/question/list/page",
+      body: questionQueryRequest,
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,
@@ -223,19 +225,20 @@ export class Service {
   }
 
   /**
-   * listPostVOByPage
-   * @param postQueryRequest postQueryRequest
-   * @returns BaseResponse_Page_PostVO_ OK
+   * 分页获取列表（封装类）
+   * 根据 id 获取
+   * @param questionQueryRequest questionQueryRequest
+   * @returns BaseResponse_Page_QuestionVO_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static listPostVoByPageUsingPost(
-    postQueryRequest: PostQueryRequest
-  ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
+  public static listQuestionVoByPageUsingPost(
+    questionQueryRequest: QuestionQueryRequest
+  ): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/list/page/vo",
-      body: postQueryRequest,
+      url: "/api/question/list/page/vo",
+      body: questionQueryRequest,
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,
@@ -245,19 +248,20 @@ export class Service {
   }
 
   /**
-   * listMyPostVOByPage
-   * @param postQueryRequest postQueryRequest
-   * @returns BaseResponse_Page_PostVO_ OK
+   * 分页获取当前用户创建的资源列表
+   * 分页获取当前用户创建的资源列表
+   * @param questionQueryRequest questionQueryRequest
+   * @returns BaseResponse_Page_QuestionVO_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static listMyPostVoByPageUsingPost(
-    postQueryRequest: PostQueryRequest
-  ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
+  public static listMyQuestionVoByPageUsingPost(
+    questionQueryRequest: QuestionQueryRequest
+  ): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/my/list/page/vo",
-      body: postQueryRequest,
+      url: "/api/question/my/list/page/vo",
+      body: questionQueryRequest,
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,
@@ -267,19 +271,20 @@ export class Service {
   }
 
   /**
-   * searchPostVOByPage
-   * @param postQueryRequest postQueryRequest
-   * @returns BaseResponse_Page_PostVO_ OK
+   * 提交题目
+   * 提交题目
+   * @param questionSubmitAddRequest questionSubmitAddRequest
+   * @returns BaseResponse_long_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static searchPostVoByPageUsingPost(
-    postQueryRequest: PostQueryRequest
-  ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
+  public static doQuestionSubmitUsingPost(
+    questionSubmitAddRequest: QuestionSubmitAddRequest
+  ): CancelablePromise<BaseResponse_long_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/search/page/vo",
-      body: postQueryRequest,
+      url: "/api/question/submit/data",
+      body: questionSubmitAddRequest,
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,
@@ -289,107 +294,43 @@ export class Service {
   }
 
   /**
-   * updatePost
-   * @param postUpdateRequest postUpdateRequest
+   * 分页获取题目提交列表（除了管理员外，普通用户只能看到非答案、提交代码等公开信息）
+   * 分页获取题目提交列表（除了管理员外，普通用户只能看到非答案、提交代码等公开信息）
+   * @param questionSubmitQueryRequest questionSubmitQueryRequest
+   * @returns BaseResponse_Page_QuestionSubmitVO_ OK
+   * @returns any Created
+   * @throws ApiError
+   */
+  public static listQuestionSubmitByPageUsingPost(
+    questionSubmitQueryRequest: QuestionSubmitQueryRequest
+  ): CancelablePromise<BaseResponse_Page_QuestionSubmitVO_ | any> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/question/submit/list/page",
+      body: questionSubmitQueryRequest,
+      errors: {
+        401: `Unauthorized`,
+        403: `Forbidden`,
+        404: `Not Found`,
+      },
+    });
+  }
+
+  /**
+   * 更新（仅管理员）
+   * 更新（仅管理员）
+   * @param questionUpdateRequest questionUpdateRequest
    * @returns BaseResponse_boolean_ OK
    * @returns any Created
    * @throws ApiError
    */
-  public static updatePostUsingPost(
-    postUpdateRequest: PostUpdateRequest
+  public static updateQuestionUsingPost(
+    questionUpdateRequest: QuestionUpdateRequest
   ): CancelablePromise<BaseResponse_boolean_ | any> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/post/update",
-      body: postUpdateRequest,
-      errors: {
-        401: `Unauthorized`,
-        403: `Forbidden`,
-        404: `Not Found`,
-      },
-    });
-  }
-
-  /**
-   * doPostFavour
-   * @param postFavourAddRequest postFavourAddRequest
-   * @returns BaseResponse_int_ OK
-   * @returns any Created
-   * @throws ApiError
-   */
-  public static doPostFavourUsingPost(
-    postFavourAddRequest: PostFavourAddRequest
-  ): CancelablePromise<BaseResponse_int_ | any> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/api/post_favour/",
-      body: postFavourAddRequest,
-      errors: {
-        401: `Unauthorized`,
-        403: `Forbidden`,
-        404: `Not Found`,
-      },
-    });
-  }
-
-  /**
-   * listFavourPostByPage
-   * @param postFavourQueryRequest postFavourQueryRequest
-   * @returns BaseResponse_Page_PostVO_ OK
-   * @returns any Created
-   * @throws ApiError
-   */
-  public static listFavourPostByPageUsingPost(
-    postFavourQueryRequest: PostFavourQueryRequest
-  ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/api/post_favour/list/page",
-      body: postFavourQueryRequest,
-      errors: {
-        401: `Unauthorized`,
-        403: `Forbidden`,
-        404: `Not Found`,
-      },
-    });
-  }
-
-  /**
-   * listMyFavourPostByPage
-   * @param postQueryRequest postQueryRequest
-   * @returns BaseResponse_Page_PostVO_ OK
-   * @returns any Created
-   * @throws ApiError
-   */
-  public static listMyFavourPostByPageUsingPost(
-    postQueryRequest: PostQueryRequest
-  ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/api/post_favour/my/list/page",
-      body: postQueryRequest,
-      errors: {
-        401: `Unauthorized`,
-        403: `Forbidden`,
-        404: `Not Found`,
-      },
-    });
-  }
-
-  /**
-   * doThumb
-   * @param postThumbAddRequest postThumbAddRequest
-   * @returns BaseResponse_int_ OK
-   * @returns any Created
-   * @throws ApiError
-   */
-  public static doThumbUsingPost(
-    postThumbAddRequest: PostThumbAddRequest
-  ): CancelablePromise<BaseResponse_int_ | any> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/api/post_thumb/",
-      body: postThumbAddRequest,
+      url: "/api/question/update",
+      body: questionUpdateRequest,
       errors: {
         401: `Unauthorized`,
         403: `Forbidden`,

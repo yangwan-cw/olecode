@@ -72,10 +72,9 @@
 <script lang="ts" setup>
 import { defineProps, onMounted, ref, withDefaults } from "vue";
 import {
-  QuestionControllerService,
   QuestionSubmitAddRequest,
-  QuestionSubmitControllerService,
   QuestionVO,
+  Service,
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import CodeEditor from "@/components/CodeEditor.vue";
@@ -92,9 +91,7 @@ const props = withDefaults(defineProps<Props>(), {
 const question = ref<QuestionVO>();
 
 const loadData = async () => {
-  const res = await QuestionControllerService.getQuestionVoByIdUsingGet(
-    props.id as any
-  );
+  const res = await Service.getQuestionVoByIdUsingGet(props.id as any);
   if (res.code === 200) {
     question.value = res.data;
 
@@ -122,7 +119,7 @@ const doSubmit = async () => {
     message.error("代码不能为空");
     return;
   }
-  const res = await QuestionSubmitControllerService.doQuestionSubmitUsingPost({
+  const res = await Service.doQuestionSubmitUsingPost({
     ...form.value,
     questionId: question.value.id,
   });

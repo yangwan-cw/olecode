@@ -103,11 +103,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watch, watchEffect } from "vue";
-import {
-  Question,
-  QuestionControllerService,
-  QuestionQueryRequest,
-} from "../../../generated";
+import { Question, QuestionQueryRequest, Service } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
 import moment from "moment";
@@ -127,9 +123,7 @@ const searchParams = ref<QuestionQueryRequest>({
 });
 
 const loadData = async () => {
-  const res = await QuestionControllerService.listQuestionVoByPageUsingPost(
-    searchParams.value
-  );
+  const res = await Service.listQuestionVoByPageUsingPost(searchParams.value);
   if (res.code === 200) {
     dataList.value = res.data.records;
     total.value = res.data.total;

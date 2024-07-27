@@ -46,13 +46,13 @@
           </a>
         </a-col>
         <a-col
-          flex="30%"
+          flex="40%"
           style="display: flex; justify-content: center; align-items: center"
         >
           <a href="https://cn.vuejs.org/">
             <svg
               height="24"
-              style="fill: rgb(65, 184, 131); transform: ; msfilter: "
+              style="fill: rgb(65, 184, 131); msfilter: "
               viewBox="0 0 24 24"
               width="24"
               xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +68,26 @@
           <a href="https://cn.vuejs.org/">
             <p>{{ version }}</p></a
           >
+          <!--          <a-space size="large">-->
+          <!--            <a-dropdown trigger="hover">-->
+          <!--              <icon-sun-fill style="font-size: 24px" />-->
+          <!--              <template #content>-->
+          <!--                <a-doption-->
+          <!--                  v-for="(mode, index) in modes"-->
+          <!--                  :key="index"-->
+          <!--                  @click="selectMode(index)"-->
+          <!--                >-->
+          <!--                  <template #icon>-->
+          <!--                    <icon-check-->
+          <!--                      v-if="selectedMode === index"-->
+          <!--                      style="color: blue"-->
+          <!--                    />-->
+          <!--                  </template>-->
+          <!--                  <template #default>{{ mode }}</template>-->
+          <!--                </a-doption>-->
+          <!--              </template>-->
+          <!--            </a-dropdown>-->
+          <!--          </a-space>-->
         </a-col>
       </div>
     </a-row>
@@ -88,6 +108,24 @@ const searchKey = ref(["/"]);
 const { useUserStore } = useStore();
 const { loginUser } = storeToRefs(useUserStore());
 const { fetchAndUpdateUser } = useUserStore();
+const selectedMode = ref<number>(0); // 初始选中第一个模式
+const modes = ["明亮模式", "暗黑模式"];
+
+/**
+ * 系统级别模式切换
+ * @param index
+ */
+const selectMode = (index: number) => {
+  selectedMode.value = index;
+  // 可以在这里添加更多逻辑，例如改变应用主题
+  console.log(index);
+  if (index === 0) {
+    document.body.removeAttribute("arco-theme");
+  }
+  if (index === 1) {
+    document.body.setAttribute("arco-theme", "dark");
+  }
+};
 
 const visibleTag = computed(() => {
   return routes.filter((item) => {
