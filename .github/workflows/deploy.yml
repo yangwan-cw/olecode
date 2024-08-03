@@ -1,30 +1,60 @@
-name: DeployServer
+name: 发布 vue_3_dev
 
-# 触发条件
 on:
-    push:
-        branches: [master, dev]  # 在 master 和 dev 分支 push 时触发
-    pull_request:
-        branches: [master, dev]  # 在 master 和 dev 分支 PR 时触发
+  push:
+    branches: [ "master" ]  # 触发条件：推送到 master 分支
 
 jobs:
-    build:
-        runs-on: ubuntu-latest  # 运行环境
+  publish_dev_code:
+    runs-on: ubuntu-latest
+    # needs: back_java  # 确保在备份代码作业成功后才执行
+    steps:
+      - name: 打印信息 🎉
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
-        steps:
-            - uses: actions/checkout@v3  # 拉取最新代码
-            - name: Use Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: "18.16.0"  # 指定 Node 版本
-            - run: npm install
-            - run: npm run build
-            - name: TranslateFile
-              uses: wangyucode/sftp-upload-action@v1.1
-              with:
-                  host: ${{ secrets.SERVER_IP }}
-                  port: ${{ secrets.SERVER_PORT }}
-                  username: ${{ secrets.USERNAME }}
-                  password: ${{ secrets.PASSWORD }}
-                  localDir: "dist"
-                  remoteDir: ${{ secrets.SERVER_DESTINATION }}
+      - name: 打印操作系统信息 🐧
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+
+      - name: 打印分支和仓库信息 🔎
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: 检查仓库代码 👁︎
+        uses: actions/checkout@v4
+
+      - name: 打印仓库文件列表 📦
+        run: ls ${{ github.workspace }}
+
+      - name: 查看 zip 文件 📦
+        run: ls
+
+      - name: 打包 vue3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.16.0"  # 指定 Node 版本
+        - run: npm install
+        - run: npm run build
+      - name: 删除之前的文件
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          LASTSSH: "Doing something after copying"
+        with:
+          host: ${{ secrets.SERVER_PORT }}
+          user: ${{ secrets.USERNAME }}
+          pass: ${{ secrets.PASSWORD }}
+          last_ssh: |
+            cd /opt/app/1panel/1panel/apps/openresty/openresty/www/sites/vue3.site/index/dist
+            rm -rf *   # 删除目录下所有文件和子目录
+
+      - name: 推送到测试服务器备份 zip 文件夹
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          LASTSSH: "Doing something after copying"
+        with:
+          host: ${{ secrets.DEV_SERVER_HOST }}
+          user: ${{ secrets.DEV_SERVER_USER }}
+          pass: ${{ secrets.DEV_SERVER_PASSWORD }}
+          scp: |
+            dist => /opt/app/1panel/1panel/apps/openresty/openresty/www/sites/vue3.site/index/dist
+          last_ssh: |
+            ls
