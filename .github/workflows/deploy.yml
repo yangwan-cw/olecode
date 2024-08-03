@@ -2,7 +2,7 @@ name: DeployServer
 # on 表示触发actions的条件
 on:
     push:
-        branches: [dev] #main分支在push的时候会触发
+        branches: [master] #main分支在push的时候会触发
     pull_request:
         branches: [dev] #main分支在PR的时候会触发
  
