@@ -4,7 +4,17 @@ import router from "./router";
 import "@arco-design/web-vue/dist/arco.css";
 import ArcoVue from "@arco-design/web-vue";
 import { createPinia } from "pinia";
+import "@/plugin/axios";
+import "@/auth/index";
+import "bytemd/dist/index.css";
+import "@/style/style.css";
+import ArcoVueIcon from "@arco-design/web-vue/es/icon";
 
-const pinia = createPinia();
+const app = createApp(App);
+app.use(ArcoVue); // 使用 ArcoVue
+app.use(createPinia()); // 使用 Pinia
+app.use(router); // 使用路由
+app.use(ArcoVueIcon);
 
-createApp(App).use(ArcoVue).use(pinia).use(router).mount("#app");
+// 挂载应用程序
+app.mount("#app");

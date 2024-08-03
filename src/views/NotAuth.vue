@@ -1,13 +1,17 @@
 <template>
-  <div class="not-auth">
+  <div class="not-auth1">
     <div class="container">
       <div class="content">
-        <h1>Ooops....</h1>
+        <h1>Oops....</h1>
+        <!--这里需要做成动态的-->
         <p>Not auth</p>
-        <button @click="goBack">Go Back</button>
+        <button @click="goBack">
+          <icon-left />
+          Go Back
+        </button>
       </div>
       <div class="image">
-        <img src="@/assets/403.png" alt="403 Forbidden" />
+        <img alt="403 Forbidden" src="@/assets/error.png" />
       </div>
     </div>
   </div>
@@ -23,7 +27,7 @@ const goBack = () => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .not-auth {
   display: flex;
   align-items: center;
