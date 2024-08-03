@@ -5,9 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit"
-
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@babel/plugin-transform-class-static-block": "^7.24.7",
