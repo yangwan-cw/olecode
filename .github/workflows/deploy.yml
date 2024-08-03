@@ -28,12 +28,11 @@ jobs:
         run: ls
 
       - name: 打包 vue3
-      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18.16.0"  # 指定 Node 版本
-        - run: npm install
-        - run: npm run build
+      - run: npm install
+      - run: npm run build
       - name: 删除之前的文件
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         env:
